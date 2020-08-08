@@ -147,6 +147,8 @@ function addZombie() {
 
     // finer detail on zombie initial position...
     var initZombiePosX;
+    var displaceZombieY;
+    var displaceZombieX;
 
     if (entryPointXDecider == 1) {
       // if initZombiePosX is 1, put it on the right
@@ -158,11 +160,17 @@ function addZombie() {
       displaceZombieX = Math.random(1);
     }
 
+    if (Math.round(Math.random(1)) == 0) {
+      displaceZombieY = Math.random(1);
+    } else {
+      displaceZombieY = -Math.random(1);
+    }
+
     zombies.push({
       posX: initZombiePosX,
       posY: Math.random(1) * canvas.height,
       displaceX: displaceZombieX,
-      displaceY: Math.random(1),
+      displaceY: displaceZombieY,
     });
     console.log("list of all the zombies on the screen right now:");
     console.log(zombies);
