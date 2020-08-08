@@ -1,13 +1,17 @@
 <html>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
   <link rel="stylesheet" href="style.css" />
   <body>
-    <div id="newgame-note">
+    <div id="newgame-note" class="card p-3">
       <h2>Welcome to this game!</h2>
       <p>Use the arrow keys (⬆️, ⬇️, ⬅️, ➡️)</p>
-      <button id="button-start">Start</button>
+      <button id="button-start" class="btn-primary">Start</button>
     </div>
-    <div id="death-note" class="display-none">
-      <h2>You Were Infected!</h2>
+    <div id="death-note" class="display-none card">
+      <h2 class="card-body">You Were Infected!</h2>
     </div>
     <canvas id="myCanvas" width="917" height="458"> </canvas>
     <img id="player-1" src="assets/bill1.jpg" alt="Bill" class="display-none" />

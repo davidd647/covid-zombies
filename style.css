@@ -9,8 +9,6 @@ body {
 }
 
 #newgame-note {
-  background: lime;
-  color: white;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -18,6 +16,7 @@ body {
 }
 
 #death-note {
+  background: black;
   color: white;
   position: fixed;
   left: 50%;

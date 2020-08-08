@@ -83,7 +83,7 @@ function logic() {
 
     if (health <= 0) {
       lost = true;
-      console.log("you lose!");
+      console.log("you're dead!");
     }
 
     // if the zombie is 100px off the screen (to the left or right), mark it for deletion...
@@ -235,7 +235,7 @@ function keyUpHandler(e) {
 
 function deadScreen() {
   deathNote.classList.remove("display-none");
-  deathNote.innerHTML = "You lasted " + timer + " seconds before infection!";
+  deathNote.innerText = "You lasted " + timer + " seconds before infection!";
 }
 
 var mainLoop;
