@@ -57,6 +57,11 @@ function logic() {
       } else {
         health -= 1.5;
       }
+
+      // never show negative health bar
+      if (health < 0) {
+        health = 0;
+      }
     }
 
     if (health <= 0) {
