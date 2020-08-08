@@ -1,9 +1,9 @@
 // to do:
 /*
+  - reduce mask status before reducing health status
   - display "you lost!" when user loses
   - replace squares with pics
-  - issue: zombies collect in starting points and refuse to move when window isn't active
-    - how can we detect if the window is inactive, and stop all activity?
+  - issue: zombies are added but don't move when browser tab is hidden...
 */
 /////
 
@@ -11,7 +11,7 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var health = 100;
-var mask = 0;
+var mask = 100; // default should be var mask = 0;
 
 var playerX = 375;
 var playerY = 275;
@@ -51,10 +51,14 @@ function logic() {
     var distY = zombies[x].posY - playerY;
     var distH = Math.sqrt(distX * distX + distY * distY);
     if (distH < 100 && lost == false) {
-      health--;
+      if (mask > 0) {
+        mask -= 0.5;
+      } else {
+        health -= 1.5;
+      }
     }
 
-    if (health < 1) {
+    if (health <= 0) {
       lost = true;
       console.log("you lose!");
     }
@@ -106,8 +110,8 @@ function draw() {
 
   // draw mask status
   ctx.beginPath();
-  ctx.fillStyle = "#FF0000";
-  ctx.fillRect(20, 30, 10, mask);
+  ctx.fillStyle = "#DDDDDD";
+  ctx.fillRect(30, 10, 10, mask);
   ctx.fill();
   ctx.closePath();
 }
