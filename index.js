@@ -2,6 +2,8 @@
 /*
   - display "you lost!" when user loses
   - replace squares with pics
+  - issue: zombies collect in starting points and refuse to move when window isn't active
+    - how can we detect if the window is inactive, and stop all activity?
 */
 /////
 
@@ -119,10 +121,27 @@ setInterval(newFrame, 10);
 
 function addZombie() {
   console.log("add zombie now!");
+
+  // decide zombie entry point (left or right side)
+  var entryPointXDecider = Math.round(Math.random(1));
+
+  // finer detail on zombie initial position...
+  var initZombiePosX;
+
+  if (entryPointXDecider == 1) {
+    // if initZombiePosX is 1, put it on the right
+    initZombiePosX = canvas.width;
+    // if initZombiePosX is 1, use a leftward vector
+    displaceZombieX = -Math.random(1);
+  } else {
+    initZombiePosX = 0;
+    displaceZombieX = Math.random(1);
+  }
+
   zombies.push({
-    posX: 0,
-    posY: 0,
-    displaceX: Math.random(1),
+    posX: initZombiePosX,
+    posY: Math.random(1) * canvas.height,
+    displaceX: displaceZombieX,
     displaceY: Math.random(1),
   });
   console.log(zombies);
