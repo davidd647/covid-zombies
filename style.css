@@ -13,6 +13,15 @@ canvas {
   border: 1px solid #ddd;
 }
 
+#newgame-note {
+  background: lime;
+  color: white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #death-note {
   color: white;
   position: fixed;
