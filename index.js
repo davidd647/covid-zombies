@@ -136,15 +136,13 @@ function newFrame() {
   draw();
 }
 
-var mainLoop = setInterval(newFrame, 10);
-
 function stopLoops() {
   clearInterval(mainLoop);
   clearInterval(addZombieLoop);
   clearInterval(timerLoop);
 }
 
-function addZombie() {
+function addZombies() {
   // don't add zombies if user has died...
   if (lost) {
     return;
@@ -164,11 +162,11 @@ function addZombie() {
 
     if (entryPointXDecider == 1) {
       // if initZombiePosX is 1, put it on the right
-      initZombiePosX = canvas.width;
+      initZombiePosX = canvas.width + 50;
       // if initZombiePosX is 1, use a leftward vector
       displaceZombieX = -Math.random(1);
     } else {
-      initZombiePosX = 0;
+      initZombiePosX = -50;
       displaceZombieX = Math.random(1);
     }
 
@@ -188,19 +186,6 @@ function addZombie() {
     console.log(zombies);
   }
 }
-
-var addZombieLoop = setInterval(addZombie, 5000);
-
-// increase timer value every second...
-var timerLoop = setInterval(() => {
-  // don't increase timer if user has died...
-  if (lost) {
-    return;
-  }
-
-  // increase timer
-  timer++;
-}, 1000);
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -233,3 +218,24 @@ function deadScreen() {
   deathNote.classList.remove("display-none");
   deathNote.innerHTML = "You lasted " + timer + " seconds before infection!";
 }
+
+var mainLoop;
+var addZombieLoop;
+var timerLoop;
+
+function startLoops() {
+  mainLoop = setInterval(newFrame, 10);
+  addZombieLoop = setInterval(addZombies, 5000);
+
+  timerLoop = setInterval(() => {
+    // don't increase timer if user has died...
+    if (lost) {
+      return;
+    }
+
+    // increase timer
+    timer++;
+  }, 1000);
+}
+
+startLoops();
