@@ -25,6 +25,8 @@ var zombieToDelete = null;
 
 var lost = false;
 
+var timer = 0;
+
 function logic() {
   // player directions
   if (upKeyPressed) {
@@ -113,6 +115,10 @@ function draw() {
   ctx.fillRect(30, 10, 10, mask);
   ctx.fill();
   ctx.closePath();
+
+  // draw time
+  ctx.font = "30px Arial";
+  ctx.fillText(timer, 10, 50);
 }
 
 function newFrame() {
@@ -132,33 +138,49 @@ function addZombie() {
     return;
   }
 
-  // decide zombie entry point (left or right side)
-  var entryPointXDecider = Math.round(Math.random(1));
+  // increase amount of zombies as a function of timer value...
+  var zombiesToAdd = Math.round(1 + timer / 5);
 
-  // finer detail on zombie initial position...
-  var initZombiePosX;
+  for (var i = 0; i < zombiesToAdd; i++) {
+    // decide zombie entry point (left or right side)
+    var entryPointXDecider = Math.round(Math.random(1));
 
-  if (entryPointXDecider == 1) {
-    // if initZombiePosX is 1, put it on the right
-    initZombiePosX = canvas.width;
-    // if initZombiePosX is 1, use a leftward vector
-    displaceZombieX = -Math.random(1);
-  } else {
-    initZombiePosX = 0;
-    displaceZombieX = Math.random(1);
+    // finer detail on zombie initial position...
+    var initZombiePosX;
+
+    if (entryPointXDecider == 1) {
+      // if initZombiePosX is 1, put it on the right
+      initZombiePosX = canvas.width;
+      // if initZombiePosX is 1, use a leftward vector
+      displaceZombieX = -Math.random(1);
+    } else {
+      initZombiePosX = 0;
+      displaceZombieX = Math.random(1);
+    }
+
+    zombies.push({
+      posX: initZombiePosX,
+      posY: Math.random(1) * canvas.height,
+      displaceX: displaceZombieX,
+      displaceY: Math.random(1),
+    });
+    console.log("list of all the zombies on the screen right now:");
+    console.log(zombies);
   }
-
-  zombies.push({
-    posX: initZombiePosX,
-    posY: Math.random(1) * canvas.height,
-    displaceX: displaceZombieX,
-    displaceY: Math.random(1),
-  });
-  console.log("list of all the zombies on the screen right now:");
-  console.log(zombies);
 }
 
 setInterval(addZombie, 5000);
+
+// increase timer value every second...
+setInterval(() => {
+  // don't increase timer if user has died...
+  if (lost) {
+    return;
+  }
+
+  // increase timer
+  timer++;
+}, 1000);
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
