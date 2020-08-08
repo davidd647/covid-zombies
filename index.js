@@ -110,20 +110,20 @@ function draw() {
   // draw health status
   ctx.beginPath();
   ctx.fillStyle = "#FF0000";
-  ctx.fillRect(10, 10, 10, health);
+  ctx.fillRect(10, 10, health, 10);
   ctx.fill();
   ctx.closePath();
 
   // draw mask status
   ctx.beginPath();
   ctx.fillStyle = "#DDDDDD";
-  ctx.fillRect(30, 10, 10, mask);
+  ctx.fillRect(10, 30, mask, 10);
   ctx.fill();
   ctx.closePath();
 
   // draw time
   ctx.font = "30px Arial";
-  ctx.fillText(timer, 10, 50);
+  ctx.fillText(timer, canvas.width - 40, 40);
 }
 
 function newFrame() {
@@ -131,11 +131,18 @@ function newFrame() {
     logic();
   } else {
     deadScreen();
+    stopLoops();
   }
   draw();
 }
 
-setInterval(newFrame, 10);
+var mainLoop = setInterval(newFrame, 10);
+
+function stopLoops() {
+  clearInterval(mainLoop);
+  clearInterval(addZombieLoop);
+  clearInterval(timerLoop);
+}
 
 function addZombie() {
   // don't add zombies if user has died...
@@ -182,10 +189,10 @@ function addZombie() {
   }
 }
 
-setInterval(addZombie, 5000);
+var addZombieLoop = setInterval(addZombie, 5000);
 
 // increase timer value every second...
-setInterval(() => {
+var timerLoop = setInterval(() => {
   // don't increase timer if user has died...
   if (lost) {
     return;
@@ -224,5 +231,5 @@ function keyUpHandler(e) {
 
 function deadScreen() {
   deathNote.classList.remove("display-none");
-  // show a "you lost" screen here...
+  deathNote.innerHTML = "You lasted " + timer + " seconds before infection!";
 }
