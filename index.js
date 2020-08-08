@@ -13,6 +13,8 @@ var buttonStart = document.getElementById("button-start");
 var deathNote = document.getElementById("death-note");
 var player1 = document.getElementById("player-1");
 var player2 = document.getElementById("player-2");
+var zombie1 = document.getElementById("zombie-1");
+var zombie2 = document.getElementById("zombie-2");
 var steps = 0;
 var footIsUp = false;
 var ctx = canvas.getContext("2d");
@@ -112,19 +114,14 @@ function draw() {
   } else {
     ctx.drawImage(player2, playerX, playerY);
   }
-  // ctx.beginPath();
-  // ctx.fillStyle = "#FF0000";
-  // ctx.fillRect(playerX, playerY, 50, 50);
-  // ctx.fill();
-  // ctx.closePath();
 
   // draw zombies
   for (var x = 0; x < zombies.length; x++) {
-    ctx.beginPath();
-    ctx.fillStyle = "#FFF000";
-    ctx.fillRect(zombies[x].posX, zombies[x].posY, 50, 50);
-    ctx.fill();
-    ctx.closePath();
+    if (footIsUp) {
+      ctx.drawImage(zombie1, zombies[x].posX, zombies[x].posY);
+    } else {
+      ctx.drawImage(zombie2, zombies[x].posX, zombies[x].posY);
+    }
   }
 
   // draw health status
