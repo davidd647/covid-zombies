@@ -8,11 +8,6 @@ body {
   margin: 0;
 }
 
-canvas {
-  background: #333;
-  border: 1px solid #ddd;
-}
-
 #newgame-note {
   background: lime;
   color: white;

@@ -1,6 +1,5 @@
 // to do:
 /*
-  - replace squares with pics
   - zombies should avoid other zombies and player a little bit (just so that they don't collide)
     - just a tiny bit of repulsion...
   - issue: zombies are added but don't move when browser tab is hidden...
@@ -15,6 +14,7 @@ var player1 = document.getElementById("player-1");
 var player2 = document.getElementById("player-2");
 var zombie1 = document.getElementById("zombie-1");
 var zombie2 = document.getElementById("zombie-2");
+var bg = document.getElementById("bg");
 var steps = 0;
 var footIsUp = false;
 var ctx = canvas.getContext("2d");
@@ -108,6 +108,8 @@ function logic() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  ctx.drawImage(bg, 0, 0);
+
   // draw player
   if (footIsUp) {
     ctx.drawImage(player1, playerX, playerY);
@@ -140,7 +142,7 @@ function draw() {
 
   // draw time
   ctx.font = "30px Arial";
-  ctx.fillText(timer, canvas.width - 40, 40);
+  ctx.fillText(timer, canvas.width - 100, 40);
 }
 
 function newFrame() {
