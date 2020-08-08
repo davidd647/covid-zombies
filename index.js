@@ -1,13 +1,12 @@
 // to do:
 /*
-  - reduce mask status before reducing health status
-  - display "you lost!" when user loses
   - replace squares with pics
   - issue: zombies are added but don't move when browser tab is hidden...
 */
 /////
 
 var canvas = document.getElementById("myCanvas");
+var deathNote = document.getElementById("death-note");
 var ctx = canvas.getContext("2d");
 
 var health = 100;
@@ -117,14 +116,21 @@ function draw() {
 }
 
 function newFrame() {
-  logic();
+  if (lost != true) {
+    logic();
+  } else {
+    deadScreen();
+  }
   draw();
 }
 
 setInterval(newFrame, 10);
 
 function addZombie() {
-  console.log("add zombie now!");
+  // don't add zombies if user has died...
+  if (lost) {
+    return;
+  }
 
   // decide zombie entry point (left or right side)
   var entryPointXDecider = Math.round(Math.random(1));
@@ -148,6 +154,7 @@ function addZombie() {
     displaceX: displaceZombieX,
     displaceY: Math.random(1),
   });
+  console.log("list of all the zombies on the screen right now:");
   console.log(zombies);
 }
 
@@ -178,4 +185,9 @@ function keyUpHandler(e) {
   } else if (e.key == "Up" || e.key == "ArrowUp") {
     upKeyPressed = false;
   }
+}
+
+function deadScreen() {
+  deathNote.classList.remove("display-none");
+  // show a "you lost" screen here...
 }
