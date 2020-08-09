@@ -279,6 +279,7 @@ function deadScreen() {
 var mainLoop;
 var addZombieLoop;
 var timerLoop;
+var addMasksLoop;
 
 function startLoops() {
   mainLoop = setInterval(newFrame, 10);
@@ -293,6 +294,8 @@ function startLoops() {
     // increase timer
     timer++;
   }, 1000);
+
+  addMasksLoop = setInterval(addMasks, 5000);
 }
 
 buttonStart.addEventListener("click", (e) => {
@@ -352,4 +355,3 @@ function addMasks() {
   // }
   //}
 }
-var addMasksLoop = setInterval(addMasks, 5000);
