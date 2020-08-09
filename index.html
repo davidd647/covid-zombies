@@ -53,6 +53,53 @@
       class="display-none"
     />
     <img id="bg" src="assets/bg.png" class="display-none" />
+
+    <!--Jingyi's new code (begin)!! NOW WORKING!!! -->
+    <div class="">
+      <img id="bg" src="assets/bg.png" class="display-none" />
+      <div class="text-center card">
+        <div id="output2"></div>
+        <div id="output3"></div>
+        <script>
+          $.ajax({
+            url: "https://ipapi.co/json/",
+          }).done(function (results) {
+            console.log(results);
+            var user_country = results.country_name;
+            var user_province = results.region;
+
+            $.ajax({
+              url: `https://api.covid19api.com/dayone/country/${user_country}`,
+            }).done(function (results) {
+              console.log(results);
+              var newRes = results.filter((result) => {
+                return (
+                  result.Country == user_country &&
+                  result.Province == user_province
+                );
+              });
+              //  console.log(newRes);
+              console.log(newRes[newRes.length - 1]);
+              console.log(newRes[newRes.length - 1].Province);
+              console.log(newRes[newRes.length - 1].Confirmed);
+              console.log(newRes[newRes.length - 1].Deaths);
+
+              var output2 = document.getElementById("output2");
+              output2.innerHTML =
+                "Total confirmed COVID-19 cases in " +
+                newRes[newRes.length - 1].Province +
+                ": " +
+                newRes[newRes.length - 1].Confirmed +
+                " (Updated on: " +
+                newRes[newRes.length - 1].Date.slice(0, 10) +
+                ")";
+            });
+          });
+        </script>
+      </div>
+    </div>
+
+    <!---Jingyi's new code end! NOW WORKING!!!-->
   </body>
   <script src="index.js"></script>
 </html>
