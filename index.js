@@ -9,7 +9,9 @@
 var canvas = document.getElementById("myCanvas");
 var newGameNote = document.getElementById("newgame-note");
 var buttonStart = document.getElementById("button-start");
+var buttonReplay = document.getElementById("button-replay");
 var deathNote = document.getElementById("death-note");
+var deathNoteText = document.getElementById("death-note-text");
 var player1 = document.getElementById("player-1");
 var player2 = document.getElementById("player-2");
 var zombie1 = document.getElementById("zombie-1");
@@ -262,7 +264,8 @@ function keyUpHandler(e) {
 
 function deadScreen() {
   deathNote.classList.remove("display-none");
-  deathNote.innerText = "You lasted " + timer + " seconds before infection!";
+  deathNoteText.innerText =
+    "You lasted " + timer + " seconds before infection!";
 }
 
 var mainLoop;
@@ -287,6 +290,19 @@ function startLoops() {
 buttonStart.addEventListener("click", (e) => {
   e.preventDefault();
   newGameNote.classList.add("display-none");
+  startLoops();
+});
+
+buttonReplay.addEventListener("click", (e) => {
+  e.preventDefault();
+  deathNote.classList.add("display-none");
+  zombies = [];
+  health = 100;
+  mask = 100;
+  lost = false;
+  playerX = 375;
+  playerY = 275;
+  timer = 0;
   startLoops();
 });
 
