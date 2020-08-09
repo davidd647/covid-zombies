@@ -49,16 +49,24 @@ function logic() {
 
   // player directions
   if (upKeyPressed) {
-    playerY -= 1;
+    if (playerY > 0) {
+      playerY -= 1;
+    }
   }
   if (downKeyPressed) {
-    playerY += 1;
+    if (playerY < canvas.height - 50) {
+      playerY += 1;
+    }
   }
   if (leftKeyPressed) {
-    playerX -= 1;
+    if (playerX > 0) {
+      playerX -= 1;
+    }
   }
   if (rightKeyPressed) {
-    playerX += 1;
+    if (playerX < canvas.width - 50) {
+      playerX += 1;
+    }
   }
 
   // zombie directions
