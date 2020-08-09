@@ -123,7 +123,6 @@ function logic() {
     var distH_mask = Math.sqrt(
       distX_mask * distX_mask + distY_mask * distY_mask
     );
-    console.log(distH_mask);
     if (distH_mask < 100 && lost == false) {
       NewMasks.splice(0, 1);
       mask = 100;
