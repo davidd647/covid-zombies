@@ -8,6 +8,7 @@
 
 var canvas = document.getElementById("myCanvas");
 var newGameNote = document.getElementById("newgame-note");
+var introBg = document.getElementById("intro-bg");
 var buttonStart = document.getElementById("button-start");
 var buttonReplay = document.getElementById("button-replay");
 var deathNote = document.getElementById("death-note");
@@ -329,6 +330,7 @@ function startLoops() {
 buttonStart.addEventListener("click", (e) => {
   e.preventDefault();
   newGameNote.classList.add("display-none");
+  introBg.classList.add("display-none");
   startLoops();
 });
 
