@@ -16,6 +16,7 @@ var player1 = document.getElementById("player-1");
 var player2 = document.getElementById("player-2");
 var zombie1 = document.getElementById("zombie-1");
 var zombie2 = document.getElementById("zombie-2");
+var maskImg = document.getElementById("mask-img");
 var bg = document.getElementById("bg");
 var steps = 0;
 var footIsUp = false;
@@ -123,7 +124,7 @@ function logic() {
     var distH_mask = Math.sqrt(
       distX_mask * distX_mask + distY_mask * distY_mask
     );
-    if (distH_mask < 100 && lost == false) {
+    if (distH_mask < 50 && lost == false) {
       NewMasks.splice(0, 1);
       mask = 100;
       console.log("masks");
@@ -174,11 +175,7 @@ function draw() {
   // following content within for loop provided by Jini Xu
   //draw masks
   for (var x = 0; x < NewMasks.length; x++) {
-    ctx.beginPath();
-    ctx.fillStyle = "#00FF00";
-    ctx.fillRect(NewMasks[x].maskposX, NewMasks[x].maskposY, 20, 20);
-    ctx.fill();
-    ctx.closePath();
+    ctx.drawImage(maskImg, NewMasks[x].maskposX, NewMasks[x].maskposY);
   }
 }
 
@@ -270,17 +267,41 @@ function keyUpHandler(e) {
   }
 }
 
-
 // Updated deadScreen with health info
 function deadScreen() {
   deathNote.classList.remove("display-none");
   deathNoteText.innerHTML =
-    "You lasted " + timer + " seconds before infection!" + "<br />" + "<br />" + '<font size="5"> How to protect yourself from COVID-19?</font>' + "<br />" + '<font size="4"> • Wear a mask and save lives </font>' + "<br />" + 
-    '<font size="4"> • Wash hands regularly and thoroughly </font>' + "<br />" + '<font size="4"> • Keep a safe distance </font>' +
-    "<br />" + "<br />" + '<font size="5"> If you are sick with COVID-19 or think you might have COVID-19: </font>' + "<br />" +
-    '<font size="4">•	Stay home except to get medical care </font>' + "<br />" + '<font size="4"> •	Separate yourself from other people</font>' + "<br />" + '<font size="4">•	Monitor your symptoms </font>'
-    + "<br />" + '<font size="4"> •	Wear a mask over your nose and mouth </font>' + "<br />" + '<font size="4"> •	Avoid sharing personal household items </font>' 
-    + "<br />" + '<font size="4"> •	Visit your doctor </font>' + "<br />" + "<br />" + "<br />" + '<font size="2"> Source: World Health Organization, Public Health Agency of Canada </font>';
+    "You lasted " +
+    timer +
+    " seconds before infection!" +
+    "<br />" +
+    "<br />" +
+    '<font size="5"> How to protect yourself from COVID-19?</font>' +
+    "<br />" +
+    '<font size="4"> • Wear a mask and save lives </font>' +
+    "<br />" +
+    '<font size="4"> • Wash hands regularly and thoroughly </font>' +
+    "<br />" +
+    '<font size="4"> • Keep a safe distance </font>' +
+    "<br />" +
+    "<br />" +
+    '<font size="5"> If you are sick with COVID-19 or think you might have COVID-19: </font>' +
+    "<br />" +
+    '<font size="4">•	Stay home except to get medical care </font>' +
+    "<br />" +
+    '<font size="4"> •	Separate yourself from other people</font>' +
+    "<br />" +
+    '<font size="4">•	Monitor your symptoms </font>' +
+    "<br />" +
+    '<font size="4"> •	Wear a mask over your nose and mouth </font>' +
+    "<br />" +
+    '<font size="4"> •	Avoid sharing personal household items </font>' +
+    "<br />" +
+    '<font size="4"> •	Visit your doctor </font>' +
+    "<br />" +
+    "<br />" +
+    "<br />" +
+    '<font size="2"> Source: World Health Organization, Public Health Agency of Canada </font>';
 }
 
 var mainLoop;
