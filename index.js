@@ -155,20 +155,21 @@ function draw() {
 
   // draw health status
   ctx.beginPath();
-  ctx.fillStyle = "#FF0000";
+  ctx.fillStyle = "#00FF00";
   ctx.fillRect(10, 10, health, 10);
   ctx.fill();
   ctx.closePath();
 
   // draw mask status
   ctx.beginPath();
-  ctx.fillStyle = "#DDDDDD";
+  ctx.fillStyle = "#888888";
   ctx.fillRect(10, 30, mask, 10);
   ctx.fill();
   ctx.closePath();
 
   // draw time
   ctx.font = "30px Arial";
+  ctx.fillStyle = "black";
   ctx.fillText(timer, canvas.width - 100, 40);
 
   // following content within for loop provided by Jini Xu
