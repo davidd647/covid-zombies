@@ -270,10 +270,17 @@ function keyUpHandler(e) {
   }
 }
 
+
+// Updated deadScreen with health info
 function deadScreen() {
   deathNote.classList.remove("display-none");
-  deathNoteText.innerText =
-    "You lasted " + timer + " seconds before infection!";
+  deathNoteText.innerHTML =
+    "You lasted " + timer + " seconds before infection!" + "<br />" + "<br />" + '<font size="5"> How to protect yourself from COVID-19?</font>' + "<br />" + '<font size="4"> • Wear a mask and save lives </font>' + "<br />" + 
+    '<font size="4"> • Wash hands regularly and thoroughly </font>' + "<br />" + '<font size="4"> • Keep a safe distance </font>' +
+    "<br />" + "<br />" + '<font size="5"> If you are sick with COVID-19 or think you might have COVID-19: </font>' + "<br />" +
+    '<font size="4">•	Stay home except to get medical care </font>' + "<br />" + '<font size="4"> •	Separate yourself from other people</font>' + "<br />" + '<font size="4">•	Monitor your symptoms </font>'
+    + "<br />" + '<font size="4"> •	Wear a mask over your nose and mouth </font>' + "<br />" + '<font size="4"> •	Avoid sharing personal household items </font>' 
+    + "<br />" + '<font size="4"> •	Visit your doctor </font>' + "<br />" + "<br />" + "<br />" + '<font size="2"> Source: World Health Organization, Public Health Agency of Canada </font>';
 }
 
 var mainLoop;
